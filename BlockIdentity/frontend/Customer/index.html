@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../../src/js/sha256.js"></script>
+    <script src="../../src/js/include.js"></script>
+    <script src="../../src/js/contract.js"></script>
+    <script src="../../src/js/web3.min.js"></script>
+</head>
+<style type="text/css">
+    html, body {
+        height: 100%;
+    }
+</style>
+<body>
+<div id="container">
+    <h3 class="text-center" style="margin-top: 10px">View Visa Status</h3>
+    <div id="scanPspt">
+        <a class="headFont">Scan Passport</a>
+        <br>
+        <label>
+            Biometric
+            <input type="text" class="form-control" id="biometric">
+        </label>
+        <br>
+        <button onclick="fnMove('1')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">OK</button>
+    </div>
+    <div id="inputPp">
+        <a class="headFont">Input Passphrase</a>
+        <br><br>
+        <div class="input-group mb-3" style="width: 600px; margin: auto;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+            </div>
+            <input id="password" type="text" class="form-control" placeholder="Input Passphrase" aria-describedby="basic-addon1">
+        </div>
+        <br><br>
+        <button onclick="fnMove('2')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">OK</button>
+    </div>
+    <div id="status">
+        <table class="stat">
+            <tr class="stat2">
+                <td>Status:</td>
+                <td id="statusVisa"></td>
+            </tr>
+            <tr class="stat2">
+                <td>Expiry Date:</td>
+                <td id="expiryDate"></td>
+            </tr>
+        </table>
+        <!--
+        <a class="headFont" style="padding-top: 120px;">No Match Found</a>
+        <br><br>
+        <button type="button" class="btn btn-primary">Search Again</button> -->
+    </div>
+</div>
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Immgration Officer</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src='js/bootstrap.js'></script>
+    <script src="../../src/js/sha256.js"></script>
+    <script src="../../src/js/include.js"></script>
+    <script src="../../src/js/contract.js"></script>
+    <script src="../../src/js/web3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+
+</head>
+<style type="text/css">
+    html, body {
+        height: 100%;
+    }
+</style>
+<body>
+<div id="container">
+    <h3 class="text-center" style="margin-top: 10px">Issuing Visa Status</h3>
+    <div id="scanPspt">
+        <a class="headFont">Scan Passport</a>
+        <br>
+        <label>
+            Passport biometric
+            <input class="form-control" type="password" id="passportBiometric">
+        </label>
+        <br>
+        <label>
+            Passport Number
+            <input id="passportNumber" type="password" class="form-control">
+        </label>
+        <br>
+        <label>
+            Country Code
+            <input type="text" id="countryCode" class="form-control">
+        </label>
+        <br>
+        <button onclick="fnMove('1')" type="button" class="btn btn-secondary" id="change" style="padding: 5px 30px;">Check
+        </button>
+    </div>
+    <div id="inputPp">
+        <a class="headFont">Input PassPhrase</a>
+        <br><br><br>
+        <div class="input-group mb-3" style="width: 600px; margin: auto;">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+            </div>
+            <input id="userPassword" type="password" class="form-control" placeholder="Input PassPhrase" aria-describedby="basic-addon1">
+        </div>
+        <br><br>
+        <button onclick="fnMove('2')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">OK</button>
+    </div>
+    <div id="status">
+        <label>
+            Status
+            <select class="form-control" id="userStatus">
+                <option value="1">CITIZEN</option>
+                <option value="2">PERMANENT RESIDENT</option>
+                <option value="3">LONG TERM WORKER</option>
+                <option value="4">SHORT TERM WORKER</option>
+                <option value="5">STUDENT</option>
+                <option value="6">VISITOR</option>
+            </select>
+        </label>
+        <br>
+        <label>
+            Expire Date
+            <input type="text" id="expireDate" class="form-control">
+        </label>
+        <br>
+        <button onclick="fnMove('3')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">OK
+        </button>
+        <!--
+        <a class="headFont" style="padding-top: 120px;">No Match Found</a>
+        <br><br>
+        <button type="button" class="btn btn-primary">Search Again</button> -->
+    </div>
+    <div id="success">
+        <a class="headFont">Success</a>
+        <br><br><br>
+        <button onclick="fnMove('4')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">Return</button>
+    </div>
+</div>
+<script type="text/javascript" src="js/script.js"></script>
+<script>
+    flatpickr('#expireDate');
+
+    (function () {
+        var submitButton = document.getElementById('submit');
+        // var expiredDate = Date.now() + (1000 * 5 * 60);
+        // document.getElementById('expireDate').value = expiredDate;
+    })();
+</script>
+</body>
+</html>

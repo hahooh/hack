@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Law Enf</title>
+    <script src="./src/js/jquery.js"></script>
+    <script src="./src/js/web3.min.js"></script>
+    <script src="./src/js/include.js"></script>
+    <script src="./src/js/sha256.js"></script>
+    <script src="./src/js/contract.js"></script>
+</head>
+<body>
+<label>
+    Passport
+    <select id="passport"></select>
+</label>
+<br>
+<label>
+    Current Status
+    <select id="status">
+        <option value="1">CITIZEN</option>
+        <option value="2">PERMANENT_RESIDENT</option>
+        <option value="3">LONG_TERM_WORKER</option>
+        <option value="4">SHORT_TERM_WORKER</option>
+        <option value="5">STUDENT</option>
+        <option value="6">VISITOR</option>
+    </select>
+</label>
+<br>
+<label>
+    Expire Date
+    <input type="text" id="expireDate">
+</label>
+<button id="update">Update</button>
+</body>
+</html>
+
+<script>
+    document.getElementById('update').onclick = onUpdate;
+
+    $.get('http://localhost:3000')
+        .then(function (result) {
+            var options = '';
+            result.forEach(function (passport) {
+                options += '<option value="' + passport.HashAddress + '">' + passport.PassportNumber + '</option>';
+            });
+            document.getElementById('passport').innerHTML = options;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    function onUpdate(ev) {
+        ev.preventDefault();
+        var hashAddress = document.getElementById('passport').value;
+        var currentStatus = document.getElementById('status').value;
+        var expireDate = document.getElementById('expireDate').value;
+
+        var visaStatus = getVisaStatus();
+        updateContract(visaStatus, hashAddress, currentStatus, expireDate);
+    }
+</script>

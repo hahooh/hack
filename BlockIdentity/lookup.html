@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scan passport</title>
+    <script src="./src/js/jquery.js"></script>
+    <script src="./src/js/web3.min.js"></script>
+    <script src="./src/js/include.js"></script>
+    <script src="./src/js/sha256.js"></script>
+    <script src="./src/js/contract.js"></script>
+</head>
+<body>
+<h4>Scan Passport</h4>
+<label>
+    biometric
+    <input id="biometric" type="text">
+</label>
+<label>
+    password
+    <input type="password" id="password">
+</label>
+<button id="search">Search</button>
+<div id="personStatus">
+    Status: <span id="status"></span>
+    <br>
+    Expire Date: <span id="expiryDate"></span>
+</div>
+</body>
+</html>
+
+<script>
+    (function () {
+        var searchButton = document.getElementById('search');
+        searchButton.onclick = onSearchClicked;
+    })();
+
+    function onSearchClicked(event) {
+        event.preventDefault();
+        var biometric = document.getElementById('biometric').value;
+        var password = document.getElementById('password').value;
+        var hashKey = sha256(biometric + password);
+        var visaStatus = getVisaStatus();
+        var expiryTimeStamp = getExpireTimeStamp(visaStatus, hashKey);
+        var statusCode = getStatusCode(visaStatus, hashKey);
+        var expiryDate = new Date(expiryTimeStamp);
+        var today = new Date();
+        var status = ['Citizen', 'Permanent Resident', 'Long term worker', 'short term worker', 'student', 'visitor'];
+        var statusContainer = document.getElementById('status');
+        var expiryDateContainer = document.getElementById('expiryDate');
+
+        var statusString = status[statusCode - 1];
+        if (statusCode === 0) {
+            statusString = 'UNDEFINED';
+        }
+
+        var expireTimeString = expiryDate.getFullYear() + '-' + (expiryDate.getMonth() + 1) + '-' + expiryDate.getDate() + ' (' + (expiryDate < today ? 'expired' : 'valid') + ')';
+        if (expiryTimeStamp === 0) {
+            expireTimeString = 'INVALID';
+        }
+
+        statusContainer.innerText = '';
+        statusContainer.innerText = statusString;
+        expiryDateContainer.innerText = '';
+        expiryDateContainer.innerText = expireTimeString;
+    }
+
+</script>

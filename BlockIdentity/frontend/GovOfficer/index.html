@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Government Officer</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src='js/bootstrap.js'></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="../../src/js/sha256.js"></script>
+    <script src="../../src/js/include.js"></script>
+    <script src="../../src/js/contract.js"></script>
+    <script src="../../src/js/web3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+
+</head>
+<style type="text/css">
+    html, body {
+        height: 100%;
+    }
+</style>
+<body>
+<div id="container">
+    <h3 class="text-center" style="margin-top: 10px">Override Visa Status</h3>
+    <div id="inputPp">
+        <a class="headFont">Input Passport Number</a>
+        <br><br>
+        <label>
+            Passport
+            <select class="form-control" id="passport"></select>
+        </label>
+        <br>
+        <button onclick="fnMove('1')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">OK</button>
+    </div>
+    <div id="status">
+        <label>
+            Current Status
+            <select class="form-control" id="userStatus">
+                <option value="1">CITIZEN</option>
+                <option value="2">PERMANENT RESIDENT</option>
+                <option value="3">LONG TERM WORKER</option>
+                <option value="4">SHORT TERM WORKER</option>
+                <option value="5">STUDENT</option>
+                <option value="6">VISITOR</option>
+            </select>
+        </label>
+        <br>
+        <label>
+            Expiry Date
+            <input class="form-control" type="text" id="expireDate">
+        </label>
+        <br>
+        <button onclick="fnMove('2')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">OK
+        </button>
+        <!--
+        <a class="headFont" style="padding-top: 120px;">No Match Found</a>
+        <br><br>
+        <button type="button" class="btn btn-primary">Search Again</button> -->
+    </div>
+    <div id="success">
+        <a class="headFont">Success</a>
+        <br><br>
+        <button onclick="fnMove('3')" type="button" class="btn btn-secondary" style="padding: 5px 30px;">Return</button>
+    </div>
+</div>
+<script type="text/javascript" src="js/script.js"></script>
+<script>
+    flatpickr('#expireDate');
+</script>
+</body>
+</html>

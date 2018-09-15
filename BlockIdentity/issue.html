@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue</title>
+    <script src="./src/js/jquery.js"></script>
+    <script src="./src/js/web3.min.js"></script>
+    <script src="./src/js/include.js"></script>
+    <script src="./src/js/sha256.js"></script>
+    <script src="./src/js/contract.js"></script>
+</head>
+<body>
+<label>
+    Passport Biometric
+    <input type="text" id="passportBiometric">
+</label>
+<br>
+<label>
+    Passport Number
+    <input id="passportNumber" type="text">
+</label>
+<br>
+<label>
+    Country Code
+    <input type="text" id="countryCode">
+</label>
+<br>
+<label>
+    User Password
+    <input type="text" id="userPassword">
+</label>
+<br>
+<label>
+    Status
+    <select id="status">
+        <option value="1">CITIZEN</option>
+        <option value="2">PERMANENT_RESIDENT</option>
+        <option value="3">LONG_TERM_WORKER</option>
+        <option value="4">SHORT_TERM_WORKER</option>
+        <option value="5">STUDENT</option>
+        <option value="6">VISITOR</option>
+    </select>
+</label>
+<br>
+<label>
+    Expire Date
+    <input type="text" id="expireDate">
+</label>
+<br>
+<button id="submit">
+    Submit
+</button>
+</body>
+</html>
+
+<script>
+    (function () {
+        var submitButton = document.getElementById('submit');
+        submitButton.onclick = onSubmitClicked;
+        var expiredDate = Date.now() + (1000 * 5 * 60);
+        document.getElementById('expireDate').value = expiredDate;
+    })();
+
+    function onSubmitClicked(ev) {
+        ev.preventDefault();
+        var biometric = document.getElementById('passportBiometric').value;
+        var passwordNumber = document.getElementById('passportNumber').value;
+        var countryCode = document.getElementById('countryCode').value;
+        var userPassword = document.getElementById('userPassword').value;
+        var expireDate = document.getElementById('expireDate').value;
+        var status = parseInt(document.getElementById('status').value);
+        var hashKey = sha256(biometric + userPassword);
+
+        $.post('http://localhost:3000', {
+            passportNumber: passwordNumber + countryCode,
+            hashAddress: hashKey
+        }).then(function (result) {
+            console.log(result);
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+        var visaStatus = getVisaStatus();
+        issueContract(visaStatus, hashKey, status, parseInt(expireDate));
+    }
+</script>
